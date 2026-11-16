@@ -1,0 +1,28 @@
+[package]
+name = "fips-pqc"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.80"
+description = "Pure-Rust, dependency-free implementation of ML-KEM (FIPS 203) and ML-DSA (FIPS 204)"
+license = "MIT OR Apache-2.0"
+keywords = ["ml-kem", "ml-dsa", "kyber", "dilithium", "post-quantum"]
+categories = ["cryptography", "no-std"]
+
+[features]
+default = ["std"]
+# Enables `std::error::Error` impls and the `/dev/urandom`-backed `OsRng`.
+std = []
+
+[dependencies]
+
+[dev-dependencies]
+
+# The ACVP test vectors exercise thousands of signatures; keep the test build fast
+# while still keeping overflow checks and debug assertions enabled.
+[profile.test]
+opt-level = 3
+debug-assertions = true
+overflow-checks = true
+
+[profile.dev]
+opt-level = 1
